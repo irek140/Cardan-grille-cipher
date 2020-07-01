@@ -45,77 +45,84 @@ def encryption():
 
     # Implementacja algorytmu szyfrującego
 
-    krypto_tab = []
-    number_of_grills = (ceil(len(message_char_list) / 36)) # Wyznaczenie liczby krat(grilli)
-    grills = [] # Tablica przechowująca fragmenty wiadomości mieszczące się na kratach
-    for grille in range(number_of_grills): # Podział wiadomości na kraty zawierające 36 znaków
-        grille = []
-        for i in range(36):
-            if(len(message_char_list) > 0):
-                print("Iteracja: "); print(i)
-                print("Grill: "); print(grille)
-                print("Litera do grilla: "); print(message_char_list[0])
-                grille.append(message_char_list[0])
-                message_char_list.pop(0)
-                print("Wiadomość: "); print(message_char_list)
-                print("###################################################")
-        grills.append(grille)
-        print(grille)
-    print(grills)
+    krypto_tab1 = [['X' for x in range(int(n))] for y in range(int(n))] # Tablica na kryptotekst
+    krypto_tab2 = [['X' for x in range(int(n))] for y in range(int(n))]
+    krypto_tab3 = [['X' for x in range(int(n))] for y in range(int(n))]
+    krypto_tab4 = [['X' for x in range(int(n))] for y in range(int(n))]
 
-    for grille in range(number_of_grills): # Obsługa szyfrowania każdej kraty
-        print("Szyfrowanie - krata: "); print(grille)
-        krypto_grille = [] # Utworzenie listy z zaszyfrowaną kratą
-        for i in range(36):
-            krypto_grille.append('x')
-        # Przeprowadzenie szyfrowania transpozycyjnego
-        if(len(grills[grille]) >= 1): krypto_grille[4] = grills[grille][0]
-        if(len(grills[grille]) >= 2): krypto_grille[5] = grills[grille][1]
-        if(len(grills[grille]) >= 3): krypto_grille[9] = grills[grille][2]
-        if(len(grills[grille]) >= 4): krypto_grille[11] = grills[grille][3]
-        if(len(grills[grille]) >= 5): krypto_grille[15] = grills[grille][4]
-        if(len(grills[grille]) >= 6): krypto_grille[16] = grills[grille][5]
-        if(len(grills[grille]) >= 7): krypto_grille[18] = grills[grille][6]
-        if(len(grills[grille]) >= 8): krypto_grille[25] = grills[grille][7]
-        if(len(grills[grille]) >= 9): krypto_grille[32] = grills[grille][8]
-        if(len(grills[grille]) >= 10): krypto_grille[2] = grills[grille][9]
-        if(len(grills[grille]) >= 11): krypto_grille[7] = grills[grille][10]
-        if(len(grills[grille]) >= 12): krypto_grille[12] = grills[grille][11]
-        if(len(grills[grille]) >= 13): krypto_grille[21] = grills[grille][12]
-        if(len(grills[grille]) >= 14): krypto_grille[22] = grills[grille][13]
-        if(len(grills[grille]) >= 15): krypto_grille[27] = grills[grille][14]
-        if(len(grills[grille]) >= 16): krypto_grille[29] = grills[grille][15]
-        if(len(grills[grille]) >= 17): krypto_grille[34] = grills[grille][16]
-        if(len(grills[grille]) >= 18): krypto_grille[35] = grills[grille][17]
-        if(len(grills[grille]) >= 19): krypto_grille[3] = grills[grille][18]
-        if(len(grills[grille]) >= 20): krypto_grille[10] = grills[grille][19]
-        if(len(grills[grille]) >= 21): krypto_grille[17] = grills[grille][20]
-        if(len(grills[grille]) >= 22): krypto_grille[19] = grills[grille][21]
-        if(len(grills[grille]) >= 23): krypto_grille[20] = grills[grille][22]
-        if(len(grills[grille]) >= 24): krypto_grille[24] = grills[grille][23]
-        if(len(grills[grille]) >= 25): krypto_grille[26] = grills[grille][24]
-        if(len(grills[grille]) >= 26): krypto_grille[30] = grills[grille][25]
-        if(len(grills[grille]) >= 27): krypto_grille[31] = grills[grille][26]
-        if(len(grills[grille]) >= 28): krypto_grille[0] = grills[grille][27]
-        if(len(grills[grille]) >= 29): krypto_grille[1] = grills[grille][28]
-        if(len(grills[grille]) >= 30): krypto_grille[6] = grills[grille][29]
-        if(len(grills[grille]) >= 31): krypto_grille[8] = grills[grille][30]
-        if(len(grills[grille]) >= 32): krypto_grille[13] = grills[grille][31]
-        if(len(grills[grille]) >= 33): krypto_grille[14] = grills[grille][32]
-        if(len(grills[grille]) >= 34): krypto_grille[23] = grills[grille][33]
-        if(len(grills[grille]) >= 35): krypto_grille[28] = grills[grille][34]
-        if(len(grills[grille]) >= 36): krypto_grille[33] = grills[grille][35]
-        print(krypto_grille) # Wyswietlenie zaszyfrowanej kraty
-        krypto_tab.append(krypto_grille) # Dodanie zaczyfrowanej kraty do wynikowej listy zaszyfrowanych znaków
+    ij = int(int(n) / 2) # Wyznaczenie rozmiaru lewego górnego rogu będącego kluczem
 
-    print(message)
-    print(krypto_tab) # Wyświetlenie listy z zaszyfrowaną wiadomością
+    # Przeprowadzenie pierwszej iteracji z wstawieniem 1/4 znaków do kraty
+    print("\nPrzeprowadzenie pierwszej iteracji z wstawieniem 1/4 znaków do kraty")
+    for i in range(ij):
+        for j in range(ij):
+            if(message_char_list):
+                krypto_tab1[i][j] = message_char_list.pop(0)
+
+    for i in range(len(krypto_tab1)):
+        print(krypto_tab1[i])
+
+    # Obrót kartki między pierwszą, a drugą iteracją
+    print("\nObrót kartki między pierwszą, a drugą iteracją")
+    for i in range(len(krypto_tab1)):
+        for j in range(len(krypto_tab1[i])):
+            krypto_tab2[i][j] = krypto_tab1[int(n) - 1 - j][i]
+
+    for i in range(len(krypto_tab2)):
+        print(krypto_tab2[i])
+
+    # Przeprowadzenie drugiej iteracji z wstawieniem 2/4 znaków do kraty
+    print("\nPrzeprowadzenie drugiej iteracji z wstawieniem 2/4 znaków do kraty")
+    for i in range(ij):
+        for j in range(ij):
+            if(message_char_list):
+                krypto_tab2[i][j] = message_char_list.pop(0)
+
+    # Obrót kartki między drugą, a trzecią iteracją
+    print("\nObrót kartki między drugą, a trzecią iteracją")
+    for i in range(len(krypto_tab2)):
+        for j in range(len(krypto_tab2[i])):
+            krypto_tab3[i][j] = krypto_tab2[int(n) - 1 - j][i]
+
+    for i in range(len(krypto_tab3)):
+        print(krypto_tab3[i])
+
+    # Przeprowadzenie trzeciej iteracji z wstawieniem 3/4 znaków do kraty
+    print("\nPrzeprowadzenie trzeciej iteracji z wstawieniem 3/4 znaków do kraty")
+    for i in range(ij):
+        for j in range(ij):
+            if (message_char_list):
+                krypto_tab3[i][j] = message_char_list.pop(0)
+
+    for i in range(len(krypto_tab3)):
+        print(krypto_tab3[i])
+
+    # Obrót kartki między trzecią, a czwartą iteracją
+    print("\nObrót kartki między trzecią, a czwartą iteracją")
+    for i in range(len(krypto_tab3)):
+        for j in range(len(krypto_tab3[i])):
+            krypto_tab4[i][j] = krypto_tab3[int(n) - 1 - j][i]
+
+    for i in range(len(krypto_tab4)):
+        print(krypto_tab4[i])
+
+    # Przeprowadzenie czwartej iteracji z wstawieniem 4/4 znaków do kraty
+    print("\nPrzeprowadzenie czwartej iteracji z wstawieniem 4/4 znaków do kraty")
+    for i in range(ij):
+        for j in range(ij):
+            if (message_char_list):
+                krypto_tab4[i][j] = message_char_list.pop(0)
+
+    for i in range(len(krypto_tab4)):
+        print(krypto_tab4[i])
+
     krypto_text = ""
 
-    for i in range(len(krypto_tab)): # Wydobycie zaszyfrowanych znaków i utworzenie z nich kryptotekstu
-        for j in range(len(krypto_tab[i])):
-            krypto_text += krypto_tab[i][j]
+    for i in range(len(krypto_tab4)): # Wydobycie zaszyfrowanych znaków i utworzenie z nich kryptotekstu
+        for j in range(len(krypto_tab4[i])):
+            krypto_text += krypto_tab4[i][j]
 
+    print("\nWyświetlenie kryptotekstu")
     print(krypto_text)
 
     try:
