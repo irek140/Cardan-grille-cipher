@@ -45,89 +45,107 @@ def encryption():
 
     # Implementacja algorytmu szyfrującego
 
-    krypto_tab1 = [['X' for x in range(int(n))] for y in range(int(n))] # Tablica na kryptotekst
-    krypto_tab2 = [['X' for x in range(int(n))] for y in range(int(n))]
-    krypto_tab3 = [['X' for x in range(int(n))] for y in range(int(n))]
-    krypto_tab4 = [['X' for x in range(int(n))] for y in range(int(n))]
+    number_of_grills = (ceil(len(message_char_list) / (int(n)*int(n)))) # Wyznaczenie liczby krat(grilli)
+    print("Liczba grilli: " + str(ceil( len(message_char_list) / ( int(n)*int(n) ) )))
 
-    ij = int(int(n) / 2) # Wyznaczenie rozmiaru lewego górnego rogu będącego kluczem
+    grills = []  # Tablica przechowująca fragmenty wiadomości mieszczące się na kratach
+    for grille in range(number_of_grills):
 
-    # Przeprowadzenie pierwszej iteracji z wstawieniem 1/4 znaków do kraty
-    print("\nPrzeprowadzenie pierwszej iteracji z wstawieniem 1/4 znaków do kraty")
-    for i in range(ij):
-        for j in range(ij):
-            if(message_char_list):
-                krypto_tab1[i][j] = message_char_list.pop(0)
+        krypto_tab1 = [['X' for x in range(int(n))] for y in range(int(n))] # Tablica na kryptotekst
+        krypto_tab2 = [['X' for x in range(int(n))] for y in range(int(n))]
+        krypto_tab3 = [['X' for x in range(int(n))] for y in range(int(n))]
+        krypto_tab4 = [['X' for x in range(int(n))] for y in range(int(n))]
 
-    for i in range(len(krypto_tab1)):
-        print(krypto_tab1[i])
+        ij = int(int(n) / 2) # Wyznaczenie rozmiaru lewego górnego rogu będącego kluczem
 
-    # Obrót kartki między pierwszą, a drugą iteracją
-    print("\nObrót kartki między pierwszą, a drugą iteracją")
-    for i in range(len(krypto_tab1)):
-        for j in range(len(krypto_tab1[i])):
-            krypto_tab2[i][j] = krypto_tab1[int(n) - 1 - j][i]
+        # Przeprowadzenie pierwszej iteracji z wstawieniem 1/4 znaków do kraty
+        print("\nPrzeprowadzenie pierwszej iteracji z wstawieniem 1/4 znaków do kraty")
+        for i in range(ij):
+            for j in range(ij):
+                if(message_char_list):
+                    krypto_tab1[i][j] = message_char_list.pop(0)
 
-    for i in range(len(krypto_tab2)):
-        print(krypto_tab2[i])
+        for i in range(len(krypto_tab1)):
+            print(krypto_tab1[i])
 
-    # Przeprowadzenie drugiej iteracji z wstawieniem 2/4 znaków do kraty
-    print("\nPrzeprowadzenie drugiej iteracji z wstawieniem 2/4 znaków do kraty")
-    for i in range(ij):
-        for j in range(ij):
-            if(message_char_list):
-                krypto_tab2[i][j] = message_char_list.pop(0)
+        # Obrót kartki między pierwszą, a drugą iteracją
+        print("\nObrót kartki między pierwszą, a drugą iteracją")
+        for i in range(len(krypto_tab1)):
+            for j in range(len(krypto_tab1[i])):
+                krypto_tab2[i][j] = krypto_tab1[int(n) - 1 - j][i]
 
-    # Obrót kartki między drugą, a trzecią iteracją
-    print("\nObrót kartki między drugą, a trzecią iteracją")
-    for i in range(len(krypto_tab2)):
-        for j in range(len(krypto_tab2[i])):
-            krypto_tab3[i][j] = krypto_tab2[int(n) - 1 - j][i]
+        for i in range(len(krypto_tab2)):
+            print(krypto_tab2[i])
 
-    for i in range(len(krypto_tab3)):
-        print(krypto_tab3[i])
+        # Przeprowadzenie drugiej iteracji z wstawieniem 2/4 znaków do kraty
+        print("\nPrzeprowadzenie drugiej iteracji z wstawieniem 2/4 znaków do kraty")
+        for i in range(ij):
+            for j in range(ij):
+                if(message_char_list):
+                    krypto_tab2[i][j] = message_char_list.pop(0)
 
-    # Przeprowadzenie trzeciej iteracji z wstawieniem 3/4 znaków do kraty
-    print("\nPrzeprowadzenie trzeciej iteracji z wstawieniem 3/4 znaków do kraty")
-    for i in range(ij):
-        for j in range(ij):
-            if (message_char_list):
-                krypto_tab3[i][j] = message_char_list.pop(0)
+        for i in range(len(krypto_tab2)):
+            print(krypto_tab2[i])
 
-    for i in range(len(krypto_tab3)):
-        print(krypto_tab3[i])
+        # Obrót kartki między drugą, a trzecią iteracją
+        print("\nObrót kartki między drugą, a trzecią iteracją")
+        for i in range(len(krypto_tab2)):
+            for j in range(len(krypto_tab2[i])):
+                krypto_tab3[i][j] = krypto_tab2[int(n) - 1 - j][i]
 
-    # Obrót kartki między trzecią, a czwartą iteracją
-    print("\nObrót kartki między trzecią, a czwartą iteracją")
-    for i in range(len(krypto_tab3)):
-        for j in range(len(krypto_tab3[i])):
-            krypto_tab4[i][j] = krypto_tab3[int(n) - 1 - j][i]
+        for i in range(len(krypto_tab3)):
+            print(krypto_tab3[i])
 
-    for i in range(len(krypto_tab4)):
-        print(krypto_tab4[i])
+        # Przeprowadzenie trzeciej iteracji z wstawieniem 3/4 znaków do kraty
+        print("\nPrzeprowadzenie trzeciej iteracji z wstawieniem 3/4 znaków do kraty")
+        for i in range(ij):
+            for j in range(ij):
+                if (message_char_list):
+                    krypto_tab3[i][j] = message_char_list.pop(0)
 
-    # Przeprowadzenie czwartej iteracji z wstawieniem 4/4 znaków do kraty
-    print("\nPrzeprowadzenie czwartej iteracji z wstawieniem 4/4 znaków do kraty")
-    for i in range(ij):
-        for j in range(ij):
-            if (message_char_list):
-                krypto_tab4[i][j] = message_char_list.pop(0)
+        for i in range(len(krypto_tab3)):
+            print(krypto_tab3[i])
 
-    for i in range(len(krypto_tab4)):
-        print(krypto_tab4[i])
+        # Obrót kartki między trzecią, a czwartą iteracją
+        print("\nObrót kartki między trzecią, a czwartą iteracją")
+        for i in range(len(krypto_tab3)):
+            for j in range(len(krypto_tab3[i])):
+                krypto_tab4[i][j] = krypto_tab3[int(n) - 1 - j][i]
 
-    krypto_text = ""
+        for i in range(len(krypto_tab4)):
+            print(krypto_tab4[i])
 
-    for i in range(len(krypto_tab4)): # Wydobycie zaszyfrowanych znaków i utworzenie z nich kryptotekstu
-        for j in range(len(krypto_tab4[i])):
-            krypto_text += krypto_tab4[i][j]
+        # Przeprowadzenie czwartej iteracji z wstawieniem 4/4 znaków do kraty
+        print("\nPrzeprowadzenie czwartej iteracji z wstawieniem 4/4 znaków do kraty")
+        for i in range(ij):
+            for j in range(ij):
+                if (message_char_list):
+                    krypto_tab4[i][j] = message_char_list.pop(0)
+
+        for i in range(len(krypto_tab4)):
+            print(krypto_tab4[i])
+
+        krypto_text = ""
+
+        for i in range(len(krypto_tab4)): # Wydobycie zaszyfrowanych znaków i utworzenie z nich kryptotekstu
+            for j in range(len(krypto_tab4[i])):
+                krypto_text += krypto_tab4[i][j]
+
+        grills.append(krypto_text)
+
+    encrypted_message = ""
+    for i in range(len(grills)):
+        for j in range(len(grills[i])):
+            encrypted_message += grills[i][j]
 
     print("\nWyświetlenie kryptotekstu")
-    print(krypto_text)
+    print(grills)
+    print(encrypted_message)
+    print(message)
 
     try:
         file = open('kryptotekst.txt', 'w')
-        file.write(krypto_text) # Zapis zaszyfrowanej wiadomości do pliku
+        file.write(encrypted_message) # Zapis zaszyfrowanej wiadomości do pliku
     finally:
         file.close()
 
