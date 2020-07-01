@@ -18,12 +18,33 @@ def start_program():
 
 # Funkcja odpowiadająca za szyfrowanie
 def encryption():
+    try:
+        print("Podaj rozmiar grilla/kraty (minimum 4, liczba musi być parzysta) ")
+        n = int(input())
+        if(n < 4 or n % 2 != 0):
+            print("Wprowadzono nieprawidłowy rozmiar!")
+            encryption()
+    except ValueError:
+        print("Wprowadzono nieprawidłowy rozmiar!")
+        encryption()
+
     print("Wpisz wiadomość, która ma zostać zaszyfrowana szyfrem grilla Cardano: ")
     message = input()
 
+    # Pozbycie się z tekstu zbędnych znaków
+    message = message.replace(",", "")
+    message = message.replace(";", "")
+    message = message.replace(".", "")
+    message = message.replace("?", "")
+    message = message.replace("!", "")
+    message = message.replace(":", "")
+    message = message.replace(" ", "")
+
+    message = message.upper() # Zamiana liter na duże
     message_char_list = list(message) # Zamiana wprowadzonego tekstu na listę znaków
 
     # Implementacja algorytmu szyfrującego
+
     krypto_tab = []
     number_of_grills = (ceil(len(message_char_list) / 36)) # Wyznaczenie liczby krat(grilli)
     grills = [] # Tablica przechowująca fragmenty wiadomości mieszczące się na kratach
@@ -91,7 +112,7 @@ def encryption():
     print(krypto_tab) # Wyświetlenie listy z zaszyfrowaną wiadomością
     krypto_text = ""
 
-    for i in range(len(krypto_tab)):
+    for i in range(len(krypto_tab)): # Wydobycie zaszyfrowanych znaków i utworzenie z nich kryptotekstu
         for j in range(len(krypto_tab[i])):
             krypto_text += krypto_tab[i][j]
 
