@@ -152,11 +152,22 @@ def encryption():
 
 # Funkcja odpowiadająca za deszyfrowanie
 def decryption():
-    #print("Wybierz plik z zaszyfrowaną wiadomością, która ma zostać odszyfrowana: ")
     try:
         plik = open('kryptotekst.txt') # Wczytujemy do programu plik z zaszyfrowaną wiadomością, czyli kryptotekst
         for linia in plik: # Odczytujemy i wyświetlamy linie z tego pliku
             print(linia)
+
+        try:
+            print("Deszyfrowanie pliku --- Podaj rozmiar grilla/kraty (minimum 4, liczba musi być parzysta) ")
+            n = int(input())
+            if (n < 4 or n % 2 != 0):
+                print("Wprowadzono nieprawidłowy rozmiar!")
+                decryption()
+
+
+        except ValueError:
+            print("Wprowadzono nieprawidłowy rozmiar!")
+            decryption()
 
     finally: plik.close() # Zamykamy plik
 
