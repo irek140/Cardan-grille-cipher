@@ -46,7 +46,7 @@ def encryption():
     # Implementacja algorytmu szyfrującego
 
     number_of_grills = (ceil(len(message_char_list) / (int(n)*int(n)))) # Wyznaczenie liczby krat(grilli)
-    print("Liczba grilli: " + str(ceil( len(message_char_list) / ( int(n)*int(n) ) )))
+    print("Liczba grilli: " + str(number_of_grills))
 
     grills = []  # Tablica przechowująca fragmenty wiadomości mieszczące się na kratach
     for grille in range(number_of_grills):
