@@ -64,12 +64,14 @@ def wykonajDecrypt():
     global n
     n = wpiszRozmiar()
     global ij
+
     ij = int(int(n) / 2)
     global krypto_tab1
     global lista
     getLista()
-    if (len(lista) == n * n):
+    if (len(lista) == n*n):
             krypto_tab1 = [[pop(lista) for x in range(int(n))] for y in range(int(n))]
+            obrot(krypto_tab1)
             makeEncryptedText()
     elif (len(lista) < n * n):
         print('Wprowadzono za duży rozmiar tablicy.')
