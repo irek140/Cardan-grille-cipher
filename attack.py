@@ -6,7 +6,7 @@ def getLista():
         lista = []
         plik = open('kryptotekst.txt') # Wczytujemy do programu plik z zaszyfrowaną wiadomością, czyli kryptotekst
         for linia in plik: # Odczytujemy i wyświetlamy linie z tego pliku
-            lista += list(linia);
+            lista += list(linia)
 
     finally: plik.close() # Zamykamy plik
 
@@ -21,9 +21,8 @@ def pop(lista):
 def wypelnij_tablice(lista):
     return [[pop(lista) for x in range(int(n))] for y in range(int(n))]
 
-
-
 global ij
+
 ws = 0
 wk = 0
 ks = 0
@@ -133,9 +132,6 @@ def wykonajAtak():
         decryptMore(ij, n, 0, ij)
         print('cw4\n')
         decryptMore(ij, n, ij, n)
-
-
-
 
 
 wykonajAtak()
