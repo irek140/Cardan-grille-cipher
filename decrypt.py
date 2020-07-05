@@ -1,8 +1,13 @@
+from math import ceil # funkcja odpowiedzialna za zaokrąglanie w górę
+def getLista():
+    try:
+        global lista
+        lista = []
+        plik = open('kryptotekst.txt') # Wczytujemy do programu plik z zaszyfrowaną wiadomością, czyli kryptotekst
+        for linia in plik: # Odczytujemy i wyświetlamy linie z tego pliku
+            lista += list(linia);
 
-tekst = "EPNASAIALMTOAAKA"
-
-
-lista = list(tekst)
+    finally: plik.close() # Zamykamy plik
 
 n = 4
 
@@ -12,10 +17,7 @@ def pop(lista):
     return lista.pop(0)
 
 
-def wypelnij_tablice(lista):
-    return [[pop(lista) for x in range(int(n))] for y in range(int(n))]
-
-krypto_tab1 = wypelnij_tablice(lista)
+global krypto_tab1
 
 ij = int(int(n) / 2) #rozmiar ćwiartki
 
@@ -37,11 +39,57 @@ def przekrecIOdczytajZcwiartki(tab):
             encryptedText.append(tab[i][j])
     return encryptedText
 
+def makeString(table):
+    string = ""
+    for x in table:
+        for y in x:
+            string += y
+    return string
 
 
-obrot(krypto_tab1)
+def wpiszRozmiar():
+    try:
+        print("Podaj rozmiar grilla/kraty (minimum 4, liczba musi być parzysta) ")
+        global n
+        n = int(input())
+        if(n < 4 or n % 2 != 0):
+            print("Wprowadzono nieprawidłowy rozmiar!")
+            wykonajDecrypt()
+    except ValueError:
+        print("Wprowadzono nieprawidłowy rozmiar!")
+        wykonajDecrypt()
+    return n
 
-for x in range(4):
-    decrypted.append(przekrecIOdczytajZcwiartki(krypto_tab1))
+def wykonajDecrypt():
+    global n
+    n = wpiszRozmiar()
+    global ij
+    ij = int(int(n) / 2)
+    global krypto_tab1
+    global lista
+    getLista()
+    if (len(lista) == n * n):
+            krypto_tab1 = [[pop(lista) for x in range(int(n))] for y in range(int(n))]
+            makeEncryptedText()
+    elif (len(lista) < n * n):
+        print('Wprowadzono za duży rozmiar tablicy.')
+        wykonajDecrypt()
+    else:
+        numberOfGrills = (ceil(len(lista) / (int(n) * int(n))))
+        for grill in range(numberOfGrills):
+            krypto_tab1 = [[pop(lista) for x in range(int(n))] for y in range(int(n))]
+            obrot(krypto_tab1)
+            makeEncryptedText()
+            krypto_tab1.clear()
 
-print(decrypted)
+    print(makeString(decrypted))
+
+
+
+def makeEncryptedText():
+    for x in range(4):
+        decrypted.append(przekrecIOdczytajZcwiartki(krypto_tab1))
+
+
+
+wykonajDecrypt()
