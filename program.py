@@ -1,7 +1,7 @@
 # Program realizujący szyfrowanie i deszyfrowanie przy użyciu szyfru grilla Cardano
 from math import ceil # funkcja odpowiedzialna za zaokrąglanie w górę
-from decrypt import wykonajDecrypt
-from attack import wykonajAtak
+from decryptBF import wykonajDecrypt
+from attackV2 import wykonajAtak
 import random
 import string
 
