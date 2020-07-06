@@ -1,5 +1,7 @@
 from math import ceil # funkcja odpowiedzialna za zaokrąglanie w górę
-def getLista():
+
+
+def getLista(): # Odczytanie znaków z zaszyfrowanego pliku
     try:
         global lista
         lista = []
@@ -8,6 +10,7 @@ def getLista():
             lista += list(linia);
 
     finally: plik.close() # Zamykamy plik
+
 
 n = 4
 
@@ -21,7 +24,6 @@ global krypto_tab1
 
 ij = int(int(n) / 2) #rozmiar ćwiartki
 
-
 def obrot(tab):
     tab2 = [['X' for x in range(int(n))] for y in range(int(n))]
     for i in range(len(tab)):
@@ -31,6 +33,7 @@ def obrot(tab):
     krypto_tab1 = tab2
     return tab2
 
+
 def przekrecIOdczytajZcwiartki(tab):
     obrot(tab)
     encryptedText = []
@@ -38,6 +41,7 @@ def przekrecIOdczytajZcwiartki(tab):
         for j in range(ij):
             encryptedText.append(tab[i][j])
     return encryptedText
+
 
 def makeString(table):
     string = ""
@@ -54,11 +58,12 @@ def wpiszRozmiar():
         n = int(input())
         if(n < 4 or n % 2 != 0):
             print("Wprowadzono nieprawidłowy rozmiar!")
-            wykonajDecrypt()
+            wpiszRozmiar()
     except ValueError:
         print("Wprowadzono nieprawidłowy rozmiar!")
-        wykonajDecrypt()
+        wpiszRozmiar()
     return n
+
 
 def wykonajDecrypt():
     global n
@@ -66,8 +71,8 @@ def wykonajDecrypt():
     global ij
 
     ij = int(int(n) / 2)
-    global krypto_tab1
-    global lista
+    global krypto_tab1 # Tablica do przechowywania odszyfrowywanego tekstu
+    global lista # Lista ze znakami zaszyfrowanej wiadomości
     getLista()
     if (len(lista) == n*n):
             krypto_tab1 = [[pop(lista) for x in range(int(n))] for y in range(int(n))]
@@ -79,13 +84,15 @@ def wykonajDecrypt():
     else:
         numberOfGrills = (ceil(len(lista) / (int(n) * int(n))))
         for grill in range(numberOfGrills):
-            krypto_tab1 = [[pop(lista) for x in range(int(n))] for y in range(int(n))]
-            obrot(krypto_tab1)
-            makeEncryptedText()
-            krypto_tab1.clear()
-
-    print(makeString(decrypted))
-
+            try:
+                krypto_tab1 = [[pop(lista) for x in range(int(n))] for y in range(int(n))]
+                obrot(krypto_tab1)
+                makeEncryptedText()
+                krypto_tab1.clear()
+            except IndexError:
+                decrypted.clear()
+                print("Wprowadzono za mały rozmiar tablicy.")
+                wykonajDecrypt()
 
 
 def makeEncryptedText():
@@ -93,5 +100,6 @@ def makeEncryptedText():
         decrypted.append(przekrecIOdczytajZcwiartki(krypto_tab1))
 
 
-
 wykonajDecrypt()
+print("Krypto")
+print(makeString(decrypted))
