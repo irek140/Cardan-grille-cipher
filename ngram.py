@@ -26,8 +26,3 @@ class Ngram_score(object):
                 score += self.floor
         return score
 
-mojObiekt = Ngram_score("english_quadgrams.txt")
-
-liczba = mojObiekt.score("THES THES THES THES")
-
-print(liczba)

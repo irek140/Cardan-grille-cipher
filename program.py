@@ -1,18 +1,21 @@
 # Program realizujący szyfrowanie i deszyfrowanie przy użyciu szyfru grilla Cardano
 from math import ceil # funkcja odpowiedzialna za zaokrąglanie w górę
 from decrypt import wykonajDecrypt
+from attack import wykonajAtak
 import random
 import string
 
 # Funkcja rozpoczynająca działanie menu programu
 def start_program():
     print("Jeżeli chcesz zaszyfrować wiadomość wpisz S i naciśnij ENTER; jeżeli chcesz" +
-              " odszyfrować wiadomość wpisz D i naciśnij ENTER")
+              " odszyfrować wiadomość wpisz D i naciśnij ENTER; jeżeli chcesz przeprowadzić atak wpisz A i naciśnij ENTER")
     f = input() # Wczytujemy instrukcję, w której użytkownik decyduje której funkcji programu chce użyć
     if (f == "S"):
         encryption()
     elif (f == "D"):
         wykonajDecrypt()
+    elif (f == "A"):
+        wykonajAtak()
     else:
         print("Wprowadź poprawną instrukcję!")
         start_program()

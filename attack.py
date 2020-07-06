@@ -1,4 +1,5 @@
 from math import ceil # funkcja odpowiedzialna za zaokrąglanie w górę
+from ngram import Ngram_score
 global lista
 def getLista():
     try:
@@ -133,5 +134,8 @@ def wykonajAtak():
         print('cw4\n')
         decryptMore(ij, n, ij, n)
 
+    mojObiekt = Ngram_score("english_quadgrams.txt")
+    liczba = mojObiekt.score(str(decrypted))
+    print(liczba)
 
-wykonajAtak()
+
