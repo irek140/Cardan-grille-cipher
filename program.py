@@ -1,6 +1,6 @@
 # Program realizujący szyfrowanie i deszyfrowanie przy użyciu szyfru grilla Cardano
 from math import ceil # funkcja odpowiedzialna za zaokrąglanie w górę
-
+from decrypt import wykonajDecrypt
 
 # Funkcja rozpoczynająca działanie menu programu
 def start_program():
@@ -10,7 +10,7 @@ def start_program():
     if (f == "S"):
         encryption()
     elif (f == "D"):
-        decryption()
+        wykonajDecrypt()
     else:
         print("Wprowadź poprawną instrukcję!")
         start_program()

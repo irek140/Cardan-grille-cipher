@@ -93,6 +93,7 @@ def wykonajDecrypt():
                 decrypted.clear()
                 print("Wprowadzono za mały rozmiar tablicy.")
                 wykonajDecrypt()
+    print(makeString(decrypted))
 
 
 def makeEncryptedText():
@@ -100,6 +101,5 @@ def makeEncryptedText():
         decrypted.append(przekrecIOdczytajZcwiartki(krypto_tab1))
 
 
-wykonajDecrypt()
-print("Krypto")
+
 print(makeString(decrypted))
