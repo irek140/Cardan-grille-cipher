@@ -1,6 +1,8 @@
 # Program realizujący szyfrowanie i deszyfrowanie przy użyciu szyfru grilla Cardano
 from math import ceil # funkcja odpowiedzialna za zaokrąglanie w górę
 from decrypt import wykonajDecrypt
+import random
+import string
 
 # Funkcja rozpoczynająca działanie menu programu
 def start_program():
@@ -51,10 +53,16 @@ def encryption():
     grills = []  # Tablica przechowująca fragmenty wiadomości mieszczące się na kratach
     for grille in range(number_of_grills):
 
-        krypto_tab1 = [['X' for x in range(int(n))] for y in range(int(n))] # Tablica na kryptotekst
-        krypto_tab2 = [['X' for x in range(int(n))] for y in range(int(n))]
-        krypto_tab3 = [['X' for x in range(int(n))] for y in range(int(n))]
-        krypto_tab4 = [['X' for x in range(int(n))] for y in range(int(n))]
+        letters = ['A', 'B', 'C']
+        krypto_tab1 = [[random.choice(string.ascii_uppercase) for x in range(int(n))] for y in range(int(n))] # Tablica na kryptotekst
+        krypto_tab2 = [[random.choice(string.ascii_uppercase) for x in range(int(n))] for y in range(int(n))]
+        krypto_tab3 = [[random.choice(string.ascii_uppercase) for x in range(int(n))] for y in range(int(n))]
+        krypto_tab4 = [[random.choice(string.ascii_uppercase) for x in range(int(n))] for y in range(int(n))]
+
+        #krypto_tab1 = [['X' for x in range(int(n))] for y in range(int(n))] # Tablica na kryptotekst
+        #krypto_tab2 = [['X' for x in range(int(n))] for y in range(int(n))]
+        #krypto_tab3 = [['X' for x in range(int(n))] for y in range(int(n))]
+        #krypto_tab4 = [['X' for x in range(int(n))] for y in range(int(n))]
 
         ij = int(int(n) / 2) # Wyznaczenie rozmiaru lewego górnego rogu będącego kluczem
 
