@@ -83,6 +83,8 @@ def decrypt(wierszstart, wierszkoniec, kolumnastart, kolumnakoniec):
         decrypted.append(przekrecIOdczytajZcwiartki(krypto_tab1))
 
     print(makeString(decrypted))
+    print("ngram score:")
+    liczNGRAM(makeString(decrypted))
 
 def decryptMore(wierszstart, wierszkoniec, kolumnastart, kolumnakoniec):
     global ws
@@ -107,6 +109,7 @@ def decryptMore(wierszstart, wierszkoniec, kolumnastart, kolumnakoniec):
 
     print(makeString(decrypted))
 
+
 def wykonajAtak():
     global n
     global ij
@@ -118,9 +121,13 @@ def wykonajAtak():
     if (len(lista) == n * n):
             krypto_tab1 = [[pop(lista) for x in range(int(n))] for y in range(int(n))]
             decrypt(0, ij, 0, ij)
+
             decrypt(0, ij, ij, n)
+
             decrypt(ij, n, 0, ij)
+
             decrypt(ij, n, ij, n)
+
     elif (len(lista) < n * n):
         print('Wprowadzono za duży rozmiar tablicy.')
         wykonajAtak()
@@ -134,8 +141,14 @@ def wykonajAtak():
         print('cw4\n')
         decryptMore(ij, n, ij, n)
 
-    mojObiekt = Ngram_score("english_quadgrams.txt")
-    liczba = mojObiekt.score(str(decrypted))
-    print(liczba)
+
+
+def liczNGRAM(argument):
+    try:
+        mojObiekt = Ngram_score("english_quadgrams.txt")
+        liczba = mojObiekt.score(argument)
+        print(liczba)
+    except:
+        print("")
 
 
