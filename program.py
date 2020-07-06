@@ -7,15 +7,22 @@ import string
 
 # Funkcja rozpoczynająca działanie menu programu
 def start_program():
-    print("Jeżeli chcesz zaszyfrować wiadomość wpisz S i naciśnij ENTER; jeżeli chcesz" +
-              " odszyfrować wiadomość wpisz D i naciśnij ENTER; jeżeli chcesz przeprowadzić atak wpisz A i naciśnij ENTER")
+    print("Jeżeli chcesz zaszyfrować wiadomość wpisz S i naciśnij ENTER \njeżeli chcesz" +
+                " odszyfrować wiadomość wpisz D i naciśnij ENTER \njeżeli chcesz " +
+                "przeprowadzić atak wpisz A i naciśnij ENTER \njezeli chcesz " +
+                "wyjść z programu wpisz E i naciśnij ENTER")
     f = input() # Wczytujemy instrukcję, w której użytkownik decyduje której funkcji programu chce użyć
     if (f == "S"):
         encryption()
+        start_program()
     elif (f == "D"):
         wykonajDecrypt()
+        start_program()
     elif (f == "A"):
         wykonajAtak()
+        start_program()
+    elif (f == "E"):
+        print("Good bye")
     else:
         print("Wprowadź poprawną instrukcję!")
         start_program()
